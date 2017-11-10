@@ -7,6 +7,11 @@ def main():
         choice = input("Enter 1-5 to choose what you want to do: ")
         if choice = 1:
             balance = guessingGame(balance)
-        elif choice = 2
-            balance =
+        elif choice = 2:
+            balance = craps(balance)
+        elif choice = 3:
+            balance = inBetween(balance)
+        elif choice = 4:
+            directions()
 main()
+
