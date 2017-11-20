@@ -40,7 +40,15 @@ def craps(balance):
     while running:
         print "First is", dsumFirst
         print "You rolled", dsum
-        if dsum != 2 and 3 and 12 and 7 and 11:
+        if dsum in [2,3,12]:
+            balance = balance - bet
+            print "You lost", bet, "dollars. \n Your current balance is $",balance
+            return balance
+        elif dsum in [7,11]:
+            balance = balance + bet
+            print "You won", bet, "dollars. \n Your current balance is $",balance
+            return balance
+        else:
             if tries > 1 and dsum == dsumFirst:
                 balance = balance + bet
                 print "You won", bet, "dollars. \n Your current balance is $",balance
@@ -52,23 +60,17 @@ def craps(balance):
                 die2 = randint(1,6)
                 dsum = die1 + die2
                 tries += 1
-        elif dsum != 2 and 3 and 12:
-            balance = balance + bet
-            print "You won", bet, "dollars. \n Your current balance is $",balance
-            return balance
-        else:
-            balance = balance - bet
-            print "You lost", bet, "dollars. \n Your current balance is $",balance
-            return balance
 
 def inBetween(balance):
-    print("Coming Soon")
-
+    print "Coming Soon"
+    cards = {Ace: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, Seven: 7, Eight: 8, Nine: 9, Ten: 10, Jack: 11, Queen: 12, King: 13}
+    card1 = random.choice(cards)
+    card2 = random.choice(cards)
+    print card1, card2
 def directions():
-    print "\nGAMES: \n 1 - Guessing Game \n 2 - Craps \n 3 - In Between \n 4 - Help \n 5 - Quit"
-    print "\n HOW TO PLAY: "
-    print "GUESSING GAME: \n The goal of the Guessing Game is pretty simple. You are to guess a number between 1 and 20. You will continue to \nguess to you reach the number. Your pay out is determined by how many tries you take to guess the number.\n"
-    print "CRAPS: \n Coming Soon!\n"
+    print "\n HOW TO PLAY: \n"
+    print "GUESSING GAME: \n You are to guess a number between 1 and 20. You will continue to guess to you reach the number. Your pay out is determined by how many tries you take to guess the number.\n"
+    print "CRAPS: \n You will roll two die. If the sum of both die is 2, 3, or 12, you lose. If the sum is 7 or 11 you win. After the first roll, if at any time the sum of the die is equal to the sum that you got on the first roll, you win.\n"
     print "IN BETWEEN: \n Coming Soon!\n"
 
 def betty(balance):
@@ -107,4 +109,3 @@ def main():
             return
 
 main()
-
