@@ -1,4 +1,4 @@
-from random import randint
+from random import *
 
 def guessingGame(balance):
     bet = betty(balance)
@@ -62,11 +62,62 @@ def craps(balance):
                 tries += 1
 
 def inBetween(balance):
-    print "Coming Soon"
-    cards = {Ace: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, Seven: 7, Eight: 8, Nine: 9, Ten: 10, Jack: 11, Queen: 12, King: 13}
-    card1 = random.choice(cards)
-    card2 = random.choice(cards)
-    print card1, card2
+    bet = betty(balance)
+    card1 = randint(1,13)
+    card2 = randint(1,13)
+    cards = [card1, card2]
+    cards.sort()
+    cardGuess = raw_input("Guess a card to see if it is between one of the cards chosen. (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King): ")
+    if cardGuess == "Ace":
+        cardGuess = 1
+    elif cardGuess == "Jack":
+        cardGuess = 11
+    elif cardGuess == "Queen":
+        cardGuess = 12
+    elif cardGuess == "King":
+        cardGuess = 13
+    if cardGuess in range(min(cards), max(cards)+1):
+        if card1 == 1:
+            card1 = "Ace"
+        elif card1 == 11:
+            card1 = "Jack"
+        elif card1 == 12:
+            card1 = "Queen"
+        elif card1 == 13:
+            card1 = "King"
+        if card2 == 1:
+            card2 = "Ace"
+        elif card2 == 11:
+            card2 = "Jack"
+        elif card2 == 12:
+            card2 = "Queen"
+        elif card2 == 13:
+            card2 = "King"
+        print "The cards were", min(cards), "and", max(cards)
+        balance = balance + bet
+        print "You won", bet, "dollars. \n Your current balance is $",balance
+        return balance
+    else:
+        if card1 == 1:
+            card1 = "Ace"
+        elif card1 == 11:
+            card1 = "Jack"
+        elif card1 == 12:
+            card1 = "Queen"
+        elif card1 == 13:
+            card1 = "King"
+        if card2 == 1:
+            card2 = "Ace"
+        elif card2 == 11:
+            card2 = "Jack"
+        elif card2 == 12:
+            card2 = "Queen"
+        elif card2 == 13:
+            card2 = "King"
+        print "The cards were", min(cards), "and", max(cards)
+        balance = balance - bet
+        print "You lost", bet, "dollars. \n Your current balance is $",balance
+        return balance
 def directions():
     print "\n HOW TO PLAY: \n"
     print "GUESSING GAME: \n You are to guess a number between 1 and 20. You will continue to guess to you reach the number. Your pay out is determined by how many tries you take to guess the number.\n"
@@ -95,17 +146,23 @@ def main():
         if balance == 0:
             print "You lost all your money."
             return
-        choice = raw_input("\n 1 - Guessing Game \n 2 - Craps \n 3 - In Between \n 4 - Help \n 5 - Quit \n \n Enter 1-5 to choose what you want to do: ")
-        if choice == "1":
-            balance = guessingGame(balance)
-        elif choice == "2":
-            balance = craps(balance)
-        elif choice == "3":
-            balance = inBetween(balance)
-        elif choice == "4":
-            directions()
-        elif choice == "5":
-            print "Your final balance is", balance
-            return
+        choiceInt = 0
+        while choiceInt == 0:
+            choice = raw_input("\n 1 - Guessing Game \n 2 - Craps \n 3 - In Between \n 4 - Help \n 5 - Quit \n \n Enter 1-5 to choose what you want to do: ")
+            if choice.isdigit():
+                choiceInt== 1
+                if choice == "1":
+                    balance = guessingGame(balance)
+                elif choice == "2":
+                    balance = craps(balance)
+                elif choice == "3":
+                    balance = inBetween(balance)
+                elif choice == "4":
+                    directions()
+                elif choice == "5":
+                    print "Your final balance is", balance
+                    return
+            else:
+                print "That is not a valid choice."
 
 main()
