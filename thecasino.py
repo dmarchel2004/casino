@@ -77,43 +77,11 @@ def inBetween(balance):
     elif cardGuess == "King":
         cardGuess = 13
     if cardGuess in range(min(cards), max(cards)+1):
-        if card1 == 1:
-            card1 = "Ace"
-        elif card1 == 11:
-            card1 = "Jack"
-        elif card1 == 12:
-            card1 = "Queen"
-        elif card1 == 13:
-            card1 = "King"
-        if card2 == 1:
-            card2 = "Ace"
-        elif card2 == 11:
-            card2 = "Jack"
-        elif card2 == 12:
-            card2 = "Queen"
-        elif card2 == 13:
-            card2 = "King"
         print "The cards were", min(cards), "and", max(cards)
         balance = balance + bet
         print "You won", bet, "dollars. \n Your current balance is $",balance
         return balance
     else:
-        if card1 == 1:
-            card1 = "Ace"
-        elif card1 == 11:
-            card1 = "Jack"
-        elif card1 == 12:
-            card1 = "Queen"
-        elif card1 == 13:
-            card1 = "King"
-        if card2 == 1:
-            card2 = "Ace"
-        elif card2 == 11:
-            card2 = "Jack"
-        elif card2 == 12:
-            card2 = "Queen"
-        elif card2 == 13:
-            card2 = "King"
         print "The cards were", min(cards), "and", max(cards)
         balance = balance - bet
         print "You lost", bet, "dollars. \n Your current balance is $",balance
