@@ -3,9 +3,9 @@ from random import *
 def guessingGame(balance):
     bet = betty(balance)
     guessesTaken = 1
-    number = randint(1, 20)
-    print("I am thinking of a number between 1 and 20.")
-    while guessesTaken < 5:
+    number = randint(1,40)
+    print("I am thinking of a number between 1 and 40.")
+    while guessesTaken < 6:
         guess = raw_input('Take a guess: ')
         if guess.isdigit():
             guess = int(guess)
@@ -21,7 +21,7 @@ def guessingGame(balance):
                 print "Your current balance is", balance
                 return balance
             guessesTaken = guessesTaken + 1
-        if guessesTaken == 5:
+        if guessesTaken == 6:
             print "The number was", number
             print "You lost", bet, "dollars."
             balance = balance - bet
