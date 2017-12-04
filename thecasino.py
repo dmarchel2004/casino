@@ -67,22 +67,68 @@ def inBetween(balance):
     card2 = randint(1,13)
     cards = [card1, card2]
     cards.sort()
-    cardGuess = raw_input("Guess a card to see if it is between one of the cards chosen. (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King): ")
-    if cardGuess == "Ace":
-        cardGuess = 1
-    elif cardGuess == "Jack":
-        cardGuess = 11
-    elif cardGuess == "Queen":
-        cardGuess = 12
-    elif cardGuess == "King":
-        cardGuess = 13
-    if cardGuess in range(min(cards), max(cards)+1):
-        print "The cards were", min(cards), "and", max(cards)
+    cardGuess = 0
+    while cardGuess == 0:
+        cardGuess = raw_input("Guess a card to see if it is between one of the cards chosen. (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King): ")
+        if cardGuess == "Ace":
+            cardGuess = 1
+            cardPass = 1
+        elif cardGuess == "Jack":
+            cardGuess = 11
+            cardPass = 1
+        elif cardGuess == "Queen":
+            cardGuess = 12
+            cardPass = 1
+        elif cardGuess == "King":
+            cardGuess = 13
+            cardPass = 1
+        else:
+            if cardGuess.isdigit():
+                cardGuess = int(cardGuess)
+                cardPass = 1
+                print cardGuess
+            else:
+                print "That is not a valid guess."
+
+    if cardGuess > min(cards) and cardGuess<max(cards):
+        if card1 == 1:
+            card1 = "Ace"
+        elif card1 == 11:
+            card1 = "Jack"
+        elif card1 == 12:
+            card1 = "Queen"
+        elif card1 == 13:
+            card1 = "King"
+        if card2 == 1:
+            card2 = "Ace"
+        elif card2 == 11:
+            card2 = "Jack"
+        elif card2 == 12:
+            card2 = "Queen"
+        elif card2 == 13:
+            card2 = "King"
+        print "The cards were", card1, "and", card2
         balance = balance + bet
         print "You won", bet, "dollars. \n Your current balance is $",balance
         return balance
     else:
-        print "The cards were", min(cards), "and", max(cards)
+        if card1 == 1:
+            card1 = "Ace"
+        elif card1 == 11:
+            card1 = "Jack"
+        elif card1 == 12:
+            card1 = "Queen"
+        elif card1 == 13:
+            card1 = "King"
+        if card2 == 1:
+            card2 = "Ace"
+        elif card2 == 11:
+            card2 = "Jack"
+        elif card2 == 12:
+            card2 = "Queen"
+        elif card2 == 13:
+            card2 = "King"
+        print "The cards were", card1, "and", card2
         balance = balance - bet
         print "You lost", bet, "dollars. \n Your current balance is $",balance
         return balance
@@ -97,7 +143,7 @@ def betty(balance):
     while validBet == 0:
         print "You have $", balance
         bet = raw_input("Enter a bet: ")
-        if bet.isdigit():
+        if bet.isdigit() and bet <= balance:
             bet = int(bet)
             if bet <= balance and bet > 0:
                 if bet == 666:
@@ -111,11 +157,11 @@ def main():
     print "Welcome to the Python casino! What would you like to do?"
     choice = "0"
     while choice != "5":
-        if balance == 0:
-            print "You lost all your money."
-            return
         choiceInt = 0
         while choiceInt == 0:
+            if balance == 0:
+                print "You lost all your money."
+                return
             choice = raw_input("\n 1 - Guessing Game \n 2 - Craps \n 3 - In Between \n 4 - Help \n 5 - Quit \n \n Enter 1-5 to choose what you want to do: ")
             if choice.isdigit():
                 choiceInt== 1
