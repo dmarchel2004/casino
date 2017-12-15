@@ -1,3 +1,5 @@
+print "Git Test"
+
 from random import *
 
 def guessingGame(balance):
