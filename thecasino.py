@@ -1,4 +1,4 @@
-#Python Casino
+#The Casino
 #Dylan and Avi
 
 from random import *
