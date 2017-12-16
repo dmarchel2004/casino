@@ -1,3 +1,6 @@
+#The Casino
+#Dylan and Avi
+
 from random import *
 
 def guessingGame(balance):
