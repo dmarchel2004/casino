@@ -2,9 +2,13 @@
 #Dylan and Avi
 
 from random import *
+import os
+import time
 
 def guessingGame(balance):
+    os.system("clear")
     bet = betty(balance)
+    os.system("clear")
     guessesTaken = 1
     number = randint(1,40)
     print("I am thinking of a number between 1 and 40.")
@@ -19,8 +23,8 @@ def guessingGame(balance):
             if guess == number:
                 guessesTaken = str(guessesTaken)
                 print('Good job, you guessed my number in ' + guessesTaken + ' guesses!')
-                print "You won", bet, "dollars."
-                balance = balance + bet
+                print "You won five times your bet,", bet * 5, "dollars."
+                balance = balance + (bet * 5)
                 print "Your current balance is", balance
                 return balance
             guessesTaken = guessesTaken + 1
@@ -32,7 +36,9 @@ def guessingGame(balance):
             return balance
 
 def craps(balance):
+    os.system("clear")
     bet = betty(balance)
+    os.system("clear")
     start = raw_input('Press "enter" to roll the dice: ')
     die1 = randint(1,6)
     die2 = randint(1,6)
@@ -48,13 +54,13 @@ def craps(balance):
             print "You lost", bet, "dollars. \n Your current balance is $",balance
             return balance
         elif dsum in [7,11]:
-            balance = balance + bet
-            print "You won", bet, "dollars. \n Your current balance is $",balance
+            balance = balance + (bet * 3)
+            print "You won three times your bet,", bet * 3, "dollars. \n Your current balance is $",balance
             return balance
         else:
             if tries > 1 and dsum == dsumFirst:
-                balance = balance + bet
-                print "You won", bet, "dollars. \n Your current balance is $",balance
+                balance = balance + (bet * 3)
+                print "You won three times your bet,", bet * 3, "dollars. \n Your current balance is $",balance
                 return balance
             else:
                 print "You didn't win or lose."
@@ -65,7 +71,9 @@ def craps(balance):
                 tries += 1
 
 def inBetween(balance):
+    os.system("clear")
     bet = betty(balance)
+    os.system("clear")
     card1 = randint(1,13)
     card2 = randint(1,13)
     cards = [card1, card2]
@@ -111,8 +119,8 @@ def inBetween(balance):
         elif card2 == 13:
             card2 = "King"
         print "The cards were", card1, "and", card2
-        balance = balance + bet
-        print "You won", bet, "dollars. \n Your current balance is $",balance
+        balance = balance + (bet * 3)
+        print "You won three times your bet,", bet * 3, "dollars. \n Your current balance is $",balance
         return balance
     else:
         if card1 == 1:
@@ -134,31 +142,87 @@ def inBetween(balance):
         print "The cards were", card1, "and", card2
         balance = balance - bet
         print "You lost", bet, "dollars. \n Your current balance is $",balance
+        time.sleep(3)
         return balance
+
 def directions():
+    os.system("clear")
     print "\n HOW TO PLAY: \n"
-    print "GUESSING GAME: \n You are to guess a number between 1 and 20. You will continue to guess to you reach the number. Your pay out is determined by how many tries you take to guess the number.\n"
+    print "GUESSING GAME: \n You are to guess a number between 1 and 20. You will continue for five guess or if you get the number. If you haven't guessed the number after five guesses you lose.\n"
     print "CRAPS: \n You will roll two die. If the sum of both die is 2, 3, or 12, you lose. If the sum is 7 or 11 you win. After the first roll, if at any time the sum of the die is equal to the sum that you got on the first roll, you win.\n"
-    print "IN BETWEEN: \n Coming Soon!\n"
+    print "IN BETWEEN: \n In a range of Ace to King, guess a card. If your guess is inbetween two randomly selected cards you win. If it isn't you lose.\n"
 
 def betty(balance):
     validBet = 0
     while validBet == 0:
         print "You have $", balance
         bet = raw_input("Enter a bet: ")
-        if bet.isdigit() and bet <= balance:
+        if bet.isdigit() and int(bet) <= balance:
             bet = int(bet)
-            if bet <= balance and bet > 0:
-                if bet == 666:
-                    print "Just when you think its over. Your Demons laugh and whisper. /\/\(=-=)/\/\ "
-                return bet
+            if bet == 666:
+                print "Just when you think its over. Your Demons laugh and whisper. /\/\(=-=)/\/\ \n \n \n INSERT TEXT HERE"
+            return bet
         else:
-            print "That is not a valed bet."
+            print "That is not a valid bet."
+
+def score(balance):
+    os.system("clear")
+    valid = True
+    while valid:
+        choice = raw_input("Do you want to save your balance (1) or discard it (2): ")
+        if choice == "1":
+            name = raw_input("Enter your name (spaces will be changed to underscores): ")
+            A = open("scores.txt", "r").read()
+            A = A.split()
+            B = open("scores.txt", "r").readlines()
+            for i in A:
+                if i.isdigit():
+                    i = int(i)
+                else:
+                    A.remove(i)
+            count = 0
+            for i in A:
+                A[count] = int(i)
+                count += 1
+            finalName = ""
+            for i in name:
+                if i == " ":
+                    i = "_"
+                finalName += i
+            os.system("clear")
+            index = 0
+            valid = True
+            if len(A) > 10:
+                rang = 10
+            else:
+                rang = len(A)
+            for j in range(rang):
+                if valid:
+                    if balance >= A[index]:
+                        B.insert(index, str(balance) + " " + finalName + "\n")
+                        print "Your balance of", balance, "placed number", j + 1, "on the table. \n"
+                        valid = False
+                    elif j == 9:
+                        print "Your balance of", balance, "was not high enough to get on the table. \n"
+                        valid == False
+                    else:
+                        index += 1
+            f = open("scores.txt", "w")
+            for i in B:
+                f.write(str(i))
+            f.close()
+            C = open("scores.txt", "r").read()
+            print "The new top balances are: \n", C
+            time.sleep(3)
+            valid = False
+        elif choice == "2":
+            valid = False
 
 def main():
+    os.system("clear")
     balance = 1000
     print "Welcome to the Python casino! What would you like to do?"
-    choice = "0"
+    choice = ""
     while choice != "5":
         choiceInt = 0
         while choiceInt == 0:
@@ -178,6 +242,8 @@ def main():
                     directions()
                 elif choice == "5":
                     print "Your final balance is", balance
+                    score(balance)
+                    os.system("clear")
                     return
             else:
                 print "That is not a valid choice."
