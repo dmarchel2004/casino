@@ -1,2 +1,2 @@
-# pythoncasino
-🎰 A mini casino of three different games.
+# casino
+🎰 A mini casino, made by python, of three different games.
