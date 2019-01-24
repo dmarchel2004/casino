@@ -172,9 +172,9 @@ def score(balance):
         choice = raw_input("Do you want to save your balance (1) or discard it (2): ")
         if choice == "1":
             name = raw_input("Enter your name (spaces will be changed to underscores): ")
-            A = open("scores.txt", "r").read()
+            A = open("Scores.txt", "r").read()
             A = A.split()
-            B = open("scores.txt", "r").readlines()
+            B = open("Scores.txt", "r").readlines()
             for i in A:
                 if i.isdigit():
                     i = int(i)
@@ -207,11 +207,11 @@ def score(balance):
                         valid == False
                     else:
                         index += 1
-            f = open("scores.txt", "w")
+            f = open("Scores.txt", "w")
             for i in B:
                 f.write(str(i))
             f.close()
-            C = open("scores.txt", "r").read()
+            C = open("Scores.txt", "r").read()
             print "The new top balances are: \n", C
             time.sleep(3)
             valid = False
